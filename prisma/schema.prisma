@@ -1,0 +1,181 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL_SUPABASE")
+  //url      = env("DATABASE_URL")
+}
+
+model cliente {
+  idcli   Int      @id @default(autoincrement())
+  idpe    Int
+  estado  Boolean? @default(true)
+  persona persona  @relation(fields: [idpe], references: [idpe], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model datos {
+  idu         Int
+  login       String  @id @db.VarChar(10)
+  contrasenia String  @db.VarChar(10)
+  usuario     usuario @relation(fields: [idu], references: [idu], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model menu {
+  idm     Int       @id @default(autoincrement())
+  nom     String    @db.VarChar(40)
+  url     String    @db.VarChar(200)
+  estado  Boolean?  @default(true)
+  rolmenu rolmenu[]
+}
+
+model persona {
+  idpe      Int        @id @default(autoincrement())
+  ci        String     @db.VarChar(20)
+  nombre    String     @db.VarChar(60)
+  ap        String     @db.VarChar(40)
+  am        String?    @db.VarChar(40)
+  direccion String?    @db.VarChar(200)
+  email     String?    @db.VarChar(100)
+  estado    Boolean?   @default(true)
+  base64    String?    @db.VarChar
+  cliente   cliente[]
+  telefono  telefono[]
+  usuario   usuario[]
+}
+
+model roles {
+  idr       Int       @id @default(autoincrement())
+  nombre    String    @db.VarChar(40)
+  descrip   String    @db.VarChar(100)
+  jerarquia Int
+  estado    Boolean   @default(true)
+  rolmenu   rolmenu[]
+  usurol    usurol[]
+}
+
+model rolmenu {
+  idr   Int
+  idm   Int
+  menu  menu  @relation(fields: [idm], references: [idm], onDelete: NoAction, onUpdate: NoAction)
+  roles roles @relation(fields: [idr], references: [idr], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([idr, idm])
+}
+
+model telefono {
+  idtel   Int      @id @default(autoincrement())
+  idpe    Int
+  numero  String   @db.VarChar(20)
+  estado  Boolean? @default(true)
+  persona persona  @relation(fields: [idpe], references: [idpe], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model usuario {
+  idu     Int      @id @default(autoincrement())
+  sexo    String   @db.Char(1)
+  foto    Bytes?
+  fecnac  DateTime @db.Date
+  idpe    Int
+  estado  Boolean? @default(true)
+  conf    conf[]
+  datos   datos[]
+  persona persona  @relation(fields: [idpe], references: [idpe], onDelete: NoAction, onUpdate: NoAction)
+  usurol  usurol[]
+}
+
+model usurol {
+  idr     Int
+  idu     Int
+  roles   roles   @relation(fields: [idr], references: [idr], onDelete: NoAction, onUpdate: NoAction)
+  usuario usuario @relation(fields: [idu], references: [idu], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([idr, idu])
+}
+
+model det {
+  iddet       Int     @id @default(autoincrement())
+  iddg        Int
+  profundidad String? @db.VarChar
+  descrip     String? @db.VarChar
+  estado      Boolean @default(true)
+  dg          dg      @relation(fields: [iddg], references: [iddg], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model deth {
+  iddh   Int     @id @default(autoincrement())
+  nombre String? @db.VarChar
+  medida Float?
+  unmed  String? @db.VarChar
+}
+
+model dett {
+  iddt   Int     @id @default(autoincrement())
+  nombre String? @db.VarChar
+  medida Float?
+  unmed  String? @db.VarChar
+}
+
+model dg {
+  iddg       Int       @id @default(autoincrement())
+  dp         String    @db.VarChar
+  pv         String    @db.VarChar
+  perforador String    @db.VarChar
+  nombre     String    @db.VarChar
+  ubicacion  String    @db.VarChar
+  lat        Float
+  longi      Float
+  fecha      DateTime? @db.Date
+  estado     Boolean   @default(true)
+  tipo       String?   @db.VarChar
+  filtro     String?   @db.VarChar
+  filtrom    Float?
+  filtroum   String?   @db.VarChar
+  observa    String?   @db.VarChar
+  det        det[]
+  dh         dh[]
+  dt         dt[]
+  udf        udf[]
+}
+
+model dh {
+  iddh   Int     @id @default(autoincrement())
+  iddg   Int
+  nombre String? @db.VarChar
+  medida Float?
+  unidad String? @db.VarChar
+  estado Boolean @default(true)
+  dg     dg      @relation(fields: [iddg], references: [iddg], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model dt {
+  iddt   Int     @id @default(autoincrement())
+  iddg   Int
+  nombre String? @db.VarChar
+  medida Float?
+  unidad String? @db.VarChar
+  estado Boolean @default(true)
+  dg     dg      @relation(fields: [iddg], references: [iddg], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model udf {
+  iduf    Int     @id @default(autoincrement())
+  iddg    Int
+  inicio  Float?
+  final   Float?
+  unidad  String? @db.VarChar
+  estado  Boolean @default(true)
+  descrip String? @db.VarChar
+  dg      dg      @relation(fields: [iddg], references: [iddg], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model conf {
+  idconf     Int      @id @default(autoincrement())
+  idu        Int?
+  tema       String?  @db.VarChar
+  tam        String?  @db.VarChar
+  responsivo Boolean? @default(false)
+  usuario    usuario? @relation(fields: [idu], references: [idu], onDelete: NoAction, onUpdate: NoAction)
+}
