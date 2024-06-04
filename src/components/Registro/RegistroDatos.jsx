@@ -48,7 +48,7 @@ export default function VistaRegistro() {
       15
     ],
     tipoDeSeleccion: "multiple",
-    expansion: true,
+    expansion: false,
     //añadir
     expansionNormal: false,
     expansionModulo: RegistroExpansion,//VistaMapaRegistro,
@@ -106,7 +106,7 @@ export default function VistaRegistro() {
         setDialog: setFormulario2,
         severity: "success"
       } */
-      {
+      /* {
         header: "Modificar",
         icon: "pi pi-pencil",
         generarHandler: (data, col) => () => {
@@ -118,9 +118,9 @@ export default function VistaRegistro() {
         dialog: formulario2,
         setDialog: setFormulario2,
         severity: "success"
-      },
+      }, */
       {
-        header: "Modificar2",
+        header: "Modificar",
         icon: "pi pi-pencil",
         generarHandler: (data, col) => () => {
           // Ejecuta la función buscar con los datos proporcionados
