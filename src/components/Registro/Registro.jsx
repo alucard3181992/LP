@@ -337,7 +337,6 @@ const VistaPrincipalRegistro = ({ data }) => {
             icon="pi pi-file-edit" />)
     }
     return (<React.Fragment>
-        {bloqueo ? "SOY BLOQUEO ESTOY EN TRUE" : "SOY BLOQUEO ESTOY EN FALSE"}
         {bloqueo ? <Cargar />
             :
             <React.Fragment>
