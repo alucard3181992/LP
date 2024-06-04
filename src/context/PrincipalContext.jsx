@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { Validacion } from "@/recursos/js/Validacion";
 
 import { SplitButton } from "primereact/splitbutton";
+import { Badge } from "primereact/badge";
+
 export const PrincipalContext = createContext();
 
 const PrincipalContextProvider = (props) => {
