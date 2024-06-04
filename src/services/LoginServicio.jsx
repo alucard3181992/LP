@@ -1,5 +1,20 @@
 import axios from "axios";
+import axiosRetry from 'axios-retry';
 import { baseUrl } from "@/lib/ip";
+
+
+// Configurar axios-retry
+axiosRetry(axios, {
+    retries: 3, // Número de reintentos
+    retryDelay: (retryCount) => {
+        console.log(`Intento de reintento: ${retryCount}`);
+        return retryCount * 2000; // Retraso exponencial entre intentos
+    },
+    retryCondition: (error) => {
+        // Reintentar solo si es un error de red o un 5xx (errores de servidor)
+        return !error.response || error.response.status >= 500;
+    }
+});
 
 export class LoginServicio {
     async listar(datosLogin) {

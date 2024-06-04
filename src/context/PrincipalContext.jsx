@@ -60,8 +60,9 @@ const PrincipalContextProvider = (props) => {
     const [responsive, setResponsive] = useState()
     const [tema, setTema] = useState("mira")
 
-    useEffect(() => {
+    /* useEffect(() => {
         try {
+            //console.log("SOY EL CONTEXTO PRINCIPAL");
             setLoading(true)
             principalServicio.verificar().then((data) => {
                 setDatos(data)
@@ -82,7 +83,39 @@ const PrincipalContextProvider = (props) => {
         } catch (error) {
             console.log(error)
         }
-    }, [count]);
+    }, [count]); */
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true);
+                const data = await principalServicio.verificar();
+                setDatos(data);
+                setDatosIn(data.estado);
+
+                if (data.estado) {
+                    setEmpresa(data.empresa);
+                    try {
+                        const userData = await principalServicio.listarDatos(data.datos[0].idu);
+                        if (userData.conf && userData.conf.length !== 0) {
+                            setTema(userData.conf[0].tema);
+                            setResponsive(userData.conf[0].responsivo);
+                            setSize(userData.conf[0].tam);
+                            setUsuario(userData);
+                        }
+                    } catch (error) {
+                        console.error("Error fetching user data:", error);
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching principal data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData()
+    }, [count])
 
     Validacion.addLocale();
     useEffect(() => {

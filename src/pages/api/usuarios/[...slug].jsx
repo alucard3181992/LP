@@ -35,6 +35,7 @@ const UsuarioBDP = async (req, res) => {
             }
         }
         case "PUT": {
+            console.log("ME ESTAN LLAMANDO PUT DE SLUG");
             try {
                 const { slug } = req.query
                 const { campo, valor } = req.body
@@ -79,6 +80,7 @@ const UsuarioBDP = async (req, res) => {
         }
 
         case "GET": {
+            console.log("ME ESTAN LLAMANDO GET DE SLUG");
             try {
                 const { slug } = req.query
                 const idu = parseInt(slug[0])
