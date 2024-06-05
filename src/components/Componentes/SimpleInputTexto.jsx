@@ -6,7 +6,7 @@ import { useUpdateEffect } from 'primereact/hooks';
 
 const SimpleInputTextoMemo = ({ campo, cliente, setCliente, original, validados, setNoValidos, noValidos }) => {
 
-    const [titulo, setTitulo] = useState(null)
+    const [titulo, setTitulo] = useState(Funciones.formatearCadena(campo))
     const [modificado, setModificado] = useState(false)
     const [valorOriginal, setValorOriginal] = useState("")
     const [localValue, setLocalValue] = useState(cliente[campo] || '');
@@ -49,7 +49,7 @@ const SimpleInputTextoMemo = ({ campo, cliente, setCliente, original, validados,
     }, [cliente, campo]);
 
     return (<>
-        {titulo && <div className={validados ? "field error p-error mb-5" : "field mb-5"}>
+        <div className={validados ? "field error p-error mb-5" : "field mb-5"}>
             <span className="w-full p-float-label font-bold p-input-icon-right">
                 <i className={modificado ? "pi pi-save" : ""} />
                 <InputText
@@ -72,7 +72,7 @@ const SimpleInputTextoMemo = ({ campo, cliente, setCliente, original, validados,
 
             </span>
             {validados && < small className="p-error font-bold errorMio">{`${validados} ${titulo} es requerido`}</small>}
-        </div>}
+        </div>
 
     </>
 
