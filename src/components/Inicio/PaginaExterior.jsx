@@ -1,6 +1,8 @@
 import React from "react";
 import Link from 'next/link';
 import { Bienvenida } from "./PaginaInicio";
+import Login from "../Login/Login";
+import LoginVista from "@/pages/IngresoSistema/Ingreso";
 
 const VistaExterior = () => {
 
@@ -14,6 +16,8 @@ const VistaExterior = () => {
         <div className="">
             {Bienvenida()}
         </div>
+        {/* <LoginVista /> */}
+        {/* <Login /> */}
     </React.Fragment>)
 }
 export default VistaExterior

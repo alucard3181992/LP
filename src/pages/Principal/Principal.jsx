@@ -3,12 +3,21 @@ import PrincipalContextProvider, { PrincipalContext } from "@/context/PrincipalC
 import { Session } from "@/components/Esqueleto/VistaSkeleton";
 import PaginaInicio from "@/components/Inicio/PaginaInicio";
 import VistaExterior from "@/components/Inicio/PaginaExterior";
+import Login from "@/components/Login/Login";
+import { useRouter } from 'next/router';
 
-const VistaFuera = () => (
-    <React.Fragment>
-        <VistaExterior />
-    </React.Fragment>
-)
+const VistaFuera = () => {
+    const router = useRouter()
+    useEffect(() => {
+        router.push({
+            pathname: "/IngresoSistema/Ingreso", // Cambia esto a la ruta correcta
+        });
+    }, [])
+    return (<React.Fragment>
+        {/* <VistaExterior /> */}
+        {/* {<Login />} */}
+    </React.Fragment>)
+}
 
 const VistaDentro = () => (
     <React.Fragment>
@@ -24,7 +33,6 @@ const VistaPrincipal = () => {
     }, [datosIn])
 
     const handleScroll = (event) => {
-        console.log("SOY ESCROll");
         const scrollTop = event.target.scrollTop;
         setScroll(scrollTop);
     }

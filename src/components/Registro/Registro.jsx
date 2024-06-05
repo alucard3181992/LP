@@ -80,6 +80,7 @@ const VistaPrincipalRegistro = ({ data }) => {
     const [bloqueo2, setBloqueo2] = useState(false)
 
     useUpdateEffect(() => {
+        resetValores()
         const ejecutarFunciones = async () => {
             setVista(false)
             if (registros.length !== 0) {
@@ -104,7 +105,6 @@ const VistaPrincipalRegistro = ({ data }) => {
                     } else {
                         setBloqueo(false)
                     }
-
                 }
             }
             //console.log("AQUI 2")
@@ -347,12 +347,12 @@ const VistaPrincipalRegistro = ({ data }) => {
                     /* style={{ textTransform: "uppercase" }} */>
 
                     {/* <div className="font-bold">{vista ? "MODIFICANDO" : "NORMAL"}</div> */}
-                    <div className="font-bold text-2xl mb-5" style={{ textDecoration: "underline" }}>FICHA TECNICA DE POZO DE AGUA {vista ? "(MODIFICAR)" : "(REGISTRAR)"}</div>
+                    <div className="font-bold text-2xl mb-5" style={{ textDecoration: "underline" }}>FICHA TECNICA DE POZO DE AGUA {vista ? "(MOD-FTEC)" : "(REGISTRAR)"}</div>
                     <div className="border-round flex flex-wrap justify-content-center gap-5 mb-5" style={{ background: 'var(--surface-a)', padding: 5 }}>
                         {vista && <SoloPdf dataNueva={dataNueva}
                             documento={documento}
                             setDocumento={setDocumento}
-                        />}
+                        />}{/* 
                         {vista && registroOC && <Button label="Nuevo Registro"
                             onClick={(e) => {
                                 e.preventDefault()
@@ -367,7 +367,7 @@ const VistaPrincipalRegistro = ({ data }) => {
                             icon="pi pi-file"
                             tooltip="Nuevo Registro"
                             tooltipOptions={{ position: "bottom" }}
-                        />}
+                        />} */}
                         <Button
                             label={vista ? "Modificar" : "Registrar"}
                             onClick={registro}
@@ -435,7 +435,7 @@ const VistaPrincipalRegistro = ({ data }) => {
                                 :
                                 <VistaMapaNoLocalizar vista={{ vista, ubicacion }} Coordenadas={Coordenadas} />
                             }
-                            {noValidos["lat"] || noValidos["lng"] || noValidos["ubicado"] && < small className="p-error font-bold errorMio">{`Ubicacion es requerido`}</small>}
+                            {noValidos["lat"] && < small className="p-error font-bold errorMio">{`Ubicacion es requerido`}</small>}
                         </div>
                         <div className="col-12 md:col-6 lg:col-6">
                             <div className="font-bold mb-5 underline">II.- Datos Tecnicos</div>

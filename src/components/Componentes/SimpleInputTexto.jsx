@@ -6,12 +6,15 @@ import { useUpdateEffect } from 'primereact/hooks';
 
 const SimpleInputTextoMemo = ({ campo, cliente, setCliente, original, validados, setNoValidos, noValidos }) => {
 
-    const [titulo] = useState(Funciones.formatearCadena(campo))
+    const [titulo, setTitulo] = useState("")
     const [modificado, setModificado] = useState(false)
     const [valorOriginal, setValorOriginal] = useState("")
+    const [localValue, setLocalValue] = useState(cliente[campo] || '');
+
     useUpdateEffect(() => {
         setValorOriginal(cliente[campo])
-    }, [original])
+        setTitulo(Funciones.formatearCadena(campo))
+    }, [original, cliente])
 
     const cambioValores = (campo, valor, setCliente, cliente) => {
         const valorMayusculas = valor.toUpperCase();
@@ -41,12 +44,18 @@ const SimpleInputTextoMemo = ({ campo, cliente, setCliente, original, validados,
         return resultado;
     }
 
+    useEffect(() => {
+        setLocalValue(cliente[campo] || '');
+    }, [cliente, campo]);
+
     return (<>
         <div className={validados ? "field error p-error mb-5" : "field mb-5"}>
             <span className="w-full p-float-label font-bold p-input-icon-right">
                 <i className={modificado ? "pi pi-save" : ""} />
                 <InputText
-                    defaultValue={cliente[campo]}
+                    //defaultValue={cliente[campo]}
+                    value={localValue}
+                    onChange={(e) => setLocalValue(e.target.value)}
                     //value={cliente[campo]}
                     //onChange={(e) => cambioValores(campo, e.target.value, setCliente, cliente)}
                     onBlur={(e) => cambioValores(campo, e.target.value, setCliente, cliente)}

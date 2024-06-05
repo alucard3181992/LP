@@ -94,10 +94,10 @@ const Login = () => {
                     onClick={(event) => { event.preventDefault(); setAcceso(false) }}
                     style={{ position: 'absolute', right: 0, color: "white" }}
                 /> */}
-                <Link href={"/"} className='menus' style={{ position: 'absolute', marginRight: 10, right: 0, color: "white" }} >
+                {/* <Link href={"/"} className='menus' style={{ position: 'absolute', marginRight: 10, right: 0, color: "white" }} >
                     <i className='pi pi-fw pi-home' />
                     <span >Volver</span>
-                </Link>
+                </Link> */}
             </div>
             <div className="fondo">
                 <div className='loginContenedor loginImagen'>

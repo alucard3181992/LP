@@ -170,7 +170,7 @@ const PrincipalContextProvider = (props) => {
         setLoading(true)
         principalServicio.eliminar().then((data) => {
             setUsuario(values)
-            setPerfil("")
+            setPerfil(null)
             setCount(2)
             setMensaje("  Finalizando Session...")
             router.push("/")

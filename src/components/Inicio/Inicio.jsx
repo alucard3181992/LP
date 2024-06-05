@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import MenubarTerminado from '../Componentes/MenuBar';
 import { Validacion } from '@/recursos/js/Validacion';
 import { ContenidoSidebarResponsive, ContenidoSidebarSize } from '@/components/Inicio/ContenidoSidebar'
+import { Image } from 'primereact/image';
 //import "primereact/resources/themes/arya-blue/theme.css";
 
 const Vista = ({ Component, pageProps }) => {
@@ -116,8 +117,8 @@ const Vista = ({ Component, pageProps }) => {
                             <div className={menuBar}>
                                 <div className='top'>
                                     <Button icon={"pi pi-bars"} style={{ height: 30, marginLeft: 25, marginTop: 0, position: 'absolute', left: 0 }} onClick={cambioTamaño} />
-                                    <Link href={'/'} className='imprenta' >
-                                        {empresa}
+                                    <Link href={'/'} >
+                                        <Image src='/icons/logo.png' className='logoLuzam' alt='CARGANDO IMAGEN....' width='150' height='45' />
                                     </Link>
                                     {/* <MenubarTerminado /> */}
                                     <Button icon="pi pi-cog" style={{ height: 30, marginRight: 25, marginTop: 0, position: 'absolute', right: 0 }}

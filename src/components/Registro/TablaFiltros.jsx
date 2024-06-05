@@ -6,10 +6,10 @@ import { Badge } from "primereact/badge";
 export function TablaFiltros({ lista, setLista }) {
 
     useEffect(() => {
-        if (lista.length !== 0) {
-            //lista.sort((a, b) => a.inicio - b.inicio)
-            setListaNueva(lista)
-        }
+        //if (lista.length !== 0) {
+        //lista.sort((a, b) => a.inicio - b.inicio)
+        setListaNueva(lista)
+        //}
     }, [lista])
 
     const [listaNueva, setListaNueva] = useState([])
