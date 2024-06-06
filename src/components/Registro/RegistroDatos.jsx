@@ -120,7 +120,7 @@ export default function VistaRegistro() {
         severity: "success"
       }, */
       {
-        header: "Modificar",
+        header: "Mod/FT",
         icon: "pi pi-pencil",
         generarHandler: (data, col) => () => {
           // Ejecuta la función buscar con los datos proporcionados

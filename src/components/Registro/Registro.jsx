@@ -347,7 +347,7 @@ const VistaPrincipalRegistro = ({ data }) => {
                     /* style={{ textTransform: "uppercase" }} */>
 
                     {/* <div className="font-bold">{vista ? "MODIFICANDO" : "NORMAL"}</div> */}
-                    <div className="font-bold text-2xl mb-5" style={{ textDecoration: "underline" }}>FICHA TECNICA DE POZO DE AGUA {vista ? "(MOD-FTEC)" : "(REGISTRAR)"}</div>
+                    <div className="font-bold text-2xl mb-5" style={{ textDecoration: "underline" }}>FICHA TECNICA DE POZO DE AGUA {vista ? "(MODIFICAR)" : "(REGISTRAR)"}</div>
                     <div className="border-round flex flex-wrap justify-content-center gap-5 mb-5" style={{ background: 'var(--surface-a)', padding: 5 }}>
                         {vista && <SoloPdf dataNueva={dataNueva}
                             documento={documento}
