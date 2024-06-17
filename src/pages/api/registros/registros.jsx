@@ -9,6 +9,9 @@ const RegistroBD = async (req, res) => {
         case "GET": {
             try {
                 const data = await prisma.dg.findMany({
+                    where: {
+                        estado: true
+                    },
                     include: {
                         dt: true,
                         udf: true,

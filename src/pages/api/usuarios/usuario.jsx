@@ -9,6 +9,9 @@ const UsuarioBD = async (req, res) => {
         case "GET": {
             try {
                 const data = await prisma.usuario.findMany({
+                    where: {
+                        estado: true
+                    },
                     select: {
                         idpe: true,
                         idu: true,
